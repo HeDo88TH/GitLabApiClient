@@ -33,7 +33,7 @@ namespace GitLabApiClient
         /// This endpoint can be accessed without authentication if the group is publicly accessible.
         /// </summary>
         /// <param name="groupId">The ID, path or <see cref="Group"/> of the group.</param>
-        Task<IList<Group>> GetDescendantGroupsAsync(GroupId groupId)
+        Task<IList<Group>> GetDescendantGroupsAsync(GroupId groupId);
 
         /// <summary>
         /// Get all groups that match your string in their name or path.

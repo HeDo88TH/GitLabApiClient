@@ -60,6 +60,14 @@ namespace GitLabApiClient
             await _httpFacade.GetPagedList<Group>($"groups/{groupId}/subgroups");
 
         /// <summary>
+        /// Get a list of visible descendant groups of this group.
+        /// This endpoint can be accessed without authentication if the group is publicly accessible.
+        /// </summary>
+        /// <param name="groupId">The ID, path or <see cref="Group"/> of the group.</param>
+        public async Task<IList<Group>> GetDescendantGroupsAsync(GroupId groupId) =>
+            await _httpFacade.GetPagedList<Group>($"groups/{groupId}/descendant_groups");
+
+        /// <summary>
         /// Get all groups that match your string in their name or path.
         /// </summary>
         public async Task<IList<Group>> SearchAsync(string search) =>

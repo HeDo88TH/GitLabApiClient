@@ -46,6 +46,9 @@ namespace GitLabApiClient.Models.Issues.Responses
         [JsonProperty("user_notes_count")]
         public int UserNotesCount { get; set; }
 
+        [JsonProperty("merge_requests_count")]
+        public int MergeRequestsCount { get; set; }
+
         [JsonProperty("state")]
         public IssueState State { get; set; }
 

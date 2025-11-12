@@ -38,6 +38,7 @@ namespace GitLabApiClient.Internal.Http
         public async Task GetFile(string url, string outputPath)
         {
             var response = await _client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+            await EnsureSuccessStatusCode(response);
             var inputStream = await response.Content.ReadAsStreamAsync();
             using (var outputStream = new FileStream(outputPath, FileMode.Create, FileAccess.Write))
             {

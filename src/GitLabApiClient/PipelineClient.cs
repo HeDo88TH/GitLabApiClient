@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using GitLabApiClient.Internal.Http;
 using GitLabApiClient.Internal.Paths;
 using GitLabApiClient.Internal.Queries;
+using GitLabApiClient.Internal.Utilities;
 using GitLabApiClient.Models.Job.Requests;
 using GitLabApiClient.Models.Job.Responses;
 using GitLabApiClient.Models.Pipelines.Requests;
@@ -60,5 +61,19 @@ namespace GitLabApiClient
 
         public async Task<PipelineDetail> RetryAsync(ProjectId projectId, int pipelineId) =>
             await _httpFacade.Post<PipelineDetail>($"projects/{projectId}/pipelines/{pipelineId}/retry");
+
+        public async Task GetArtifactsArchiveAsync(ProjectId projectId, int pipelineId, string outputPath)
+        {
+            Guard.NotEmpty(outputPath, nameof(outputPath));
+
+            await _httpFacade.GetFile($"projects/{projectId}/pipelines/{pipelineId}/artifacts.zip", outputPath);
+        }
+
+        public async Task GetJobArtifactsAsync(ProjectId projectId, int jobId, string outputPath)
+        {
+            Guard.NotEmpty(outputPath, nameof(outputPath));
+
+            await _httpFacade.GetFile($"projects/{projectId}/jobs/{jobId}/artifacts", outputPath);
+        }
     }
 }

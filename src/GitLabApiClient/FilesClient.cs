@@ -29,5 +29,13 @@ namespace GitLabApiClient
                 _ => throw new GitLabException(response.StatusCode, "")
             };
         }
+
+        public async Task GetRepositoryArchiveAsync(ProjectId projectId, string reference, string outputPath)
+        {
+            Guard.NotEmpty(reference, nameof(reference));
+            Guard.NotEmpty(outputPath, nameof(outputPath));
+
+            await _httpFacade.GetFile($"projects/{projectId}/repository/archive.zip?sha={reference}", outputPath);
+        }
     }
 }
